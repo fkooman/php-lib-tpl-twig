@@ -20,6 +20,7 @@ namespace fkooman\Tpl\Twig;
 use fkooman\Tpl\TemplateManagerInterface;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
+use Twig_SimpleFilter;
 use RuntimeException;
 
 class TwigTemplateManager implements TemplateManagerInterface
@@ -73,6 +74,11 @@ class TwigTemplateManager implements TemplateManagerInterface
     public function setDefault(array $templateVariables)
     {
         $this->defaultVariables = $templateVariables;
+    }
+
+    public function addFilter(Twig_SimpleFilter $filter)
+    {
+        $this->twig->addFilter($filter);
     }
 
     public function render($templateName, array $templateVariables = array())

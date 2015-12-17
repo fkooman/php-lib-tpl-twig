@@ -17,6 +17,7 @@
  */
 namespace fkooman\Tpl\Twig;
 
+use Twig_SimpleFilter;
 use PHPUnit_Framework_TestCase;
 
 class TwigTemplateManagerTest extends PHPUnit_Framework_TestCase
@@ -45,5 +46,14 @@ class TwigTemplateManagerTest extends PHPUnit_Framework_TestCase
         );
         $t->setDefault(array('foo' => 'bar'));
         $this->assertSame('override barbaz', $t->render('2', array('bar' => 'baz')));
+    }
+
+    public function testAddFilter()
+    {
+        $t = new TwigTemplateManager(
+            array(__DIR__.'/data')
+        );
+        $t->addFilter(new Twig_SimpleFilter('rot13', 'str_rot13'));
+        $this->assertSame('one', $t->render('3', array('foo' => 'bar')));
     }
 }
