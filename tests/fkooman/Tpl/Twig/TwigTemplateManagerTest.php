@@ -30,13 +30,23 @@ class TwigTemplateManagerTest extends PHPUnit_Framework_TestCase
         $this->assertSame('bar', $t->render('1', array('foo' => 'bar')));
     }
 
-    public function testDefault()
+    public function testSetDefault()
     {
         $t = new TwigTemplateManager(
             array(__DIR__.'/data')
         );
         $t->setDefault(array('foo' => 'bar'));
         $this->assertSame('barbaz', $t->render('2', array('bar' => 'baz')));
+    }
+
+    public function testAddDefault()
+    {
+        $t = new TwigTemplateManager(
+            array(__DIR__.'/data')
+        );
+        $t->setDefault(array('foo' => 'bar'));
+        $t->addDefault(array('bar' => 'baz'));
+        $this->assertSame('barbazfooz', $t->render('4', array('baz' => 'fooz')));
     }
 
     public function testOverride()

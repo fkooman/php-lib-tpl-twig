@@ -76,6 +76,13 @@ class TwigTemplateManager implements TemplateManagerInterface
         $this->defaultVariables = $templateVariables;
     }
 
+    public function addDefault(array $templateVariables)
+    {
+        $this->defaultVariables = array_merge(
+            $this->defaultVariables, $templateVariables
+        );
+    }
+
     public function addFilter(Twig_SimpleFilter $filter)
     {
         $this->twig->addFilter($filter);

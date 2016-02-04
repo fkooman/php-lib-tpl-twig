@@ -15,7 +15,7 @@
     "name": "fkooman/tpl-twig",
     "require": {
         "ext-spl": "*",
-        "fkooman/tpl": "^2.0.0",
+        "fkooman/tpl": "^2.1.0",
         "php": ">= 5.3.3",
         "twig/twig": "^1.18"
     }
