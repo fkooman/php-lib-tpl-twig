@@ -7,6 +7,9 @@ php:
   - 7.0
   - hhvm
 
+before_install:
+  - sudo apt-get update && sudo apt-get --reinstall install -qq language-pack-nl language-pack-fr
+
 before_script:
   - composer install
 
