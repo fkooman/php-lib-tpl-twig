@@ -90,9 +90,17 @@ class TwigTemplateManager implements TemplateManagerInterface
         putenv(sprintf('LC_ALL=%s', $languageStr));
         setlocale(LC_ALL, $languageStr);
 
-        bindtextdomain($appName, $localeDir);
-        bind_textdomain_codeset($appName, 'UTF-8');
-        textdomain($appName);
+        if ($localeDir !== bindtextdomain($appName, $localeDir)) {
+            throw new RuntimeException('unable to bind text domain');
+        }
+
+        if (!is_string(bind_textdomain_codeset($appName, 'UTF-8'))) {
+            throw new RuntimeException('unable to bind text domain codeset');
+        }
+
+        if ($appName !== textdomain($appName)) {
+            throw new RuntimeException('unable to set text domain');
+        }
 
         $this->twig->addExtension(new Twig_Extensions_Extension_I18n());
     }
