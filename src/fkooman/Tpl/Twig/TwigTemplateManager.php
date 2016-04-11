@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace fkooman\Tpl\Twig;
 
 use fkooman\Tpl\TemplateManagerInterface;
@@ -22,6 +23,7 @@ use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Twig_SimpleFilter;
 use RuntimeException;
+use Twig_Extensions_Extension_I18n;
 
 class TwigTemplateManager implements TemplateManagerInterface
 {
@@ -81,6 +83,18 @@ class TwigTemplateManager implements TemplateManagerInterface
         $this->defaultVariables = array_merge(
             $this->defaultVariables, $templateVariables
         );
+    }
+
+    public function setI18n($appName, $languageStr, $localeDir)
+    {
+        putenv(sprintf('LC_ALL=%s', $languageStr));
+        setlocale(LC_ALL, $languageStr);
+
+        bindtextdomain($appName, $localeDir);
+        bind_textdomain_codeset($appName, 'UTF-8');
+        textdomain($appName);
+
+        $this->twig->addExtension(new Twig_Extensions_Extension_I18n());
     }
 
     public function addFilter(Twig_SimpleFilter $filter)

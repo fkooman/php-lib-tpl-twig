@@ -1,0 +1,3 @@
+#: /tmp/cache/b0/b0979f7eae0840c9df818d91bde194aa8e7682dbdf9c62c48bfafc42782daf99.php:19
+msgid "Hello %name%!"
+msgstr ""

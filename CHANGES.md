@@ -1,5 +1,8 @@
 # Release History
 
+## 1.3.0 (2016-04-11)
+- implement i18n support
+
 ## 1.2.0 (2016-02-04)
 - implement `addDefault`
 - update `fkooman/tpl` dependency
