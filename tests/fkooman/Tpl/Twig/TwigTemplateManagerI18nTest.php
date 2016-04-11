@@ -29,7 +29,7 @@ class TwigTemplateManagerI18nTest extends PHPUnit_Framework_TestCase
         );
 
         $localeDir = __DIR__.'/i18n/locale';
-        $t->setI18n('MyApp', 'nl_NL', $localeDir);
+        $t->setI18n('MyApp', 'nl_NL.UTF-8', $localeDir);
         $this->assertSame('Hallo World!', $t->render('1', array('name' => 'World')));
     }
 
@@ -41,19 +41,7 @@ class TwigTemplateManagerI18nTest extends PHPUnit_Framework_TestCase
 
         $localeDir = __DIR__.'/i18n/locale';
 
-        $t->setI18n('MyApp', 'fr_FR', $localeDir);
+        $t->setI18n('MyApp', 'fr_FR.UTF-8', $localeDir);
         $this->assertSame('Bonjour World!', $t->render('1', array('name' => 'World')));
-    }
-
-    public function testMissingLanguage()
-    {
-        $t = new TwigTemplateManager(
-            array(__DIR__.'/i18n')
-        );
-
-        $localeDir = __DIR__.'/i18n/locale';
-
-        $t->setI18n('MyApp', 'no_NO', $localeDir);
-        $this->assertSame('Hello World!', $t->render('1', array('name' => 'World')));
     }
 }
