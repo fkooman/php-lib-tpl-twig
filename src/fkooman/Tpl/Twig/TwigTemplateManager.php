@@ -88,7 +88,10 @@ class TwigTemplateManager implements TemplateManagerInterface
     public function setI18n($appName, $languageStr, $localeDir)
     {
         putenv(sprintf('LC_ALL=%s', $languageStr));
-        setlocale(LC_ALL, $languageStr);
+
+        if (false === setlocale(LC_ALL, $languageStr)) {
+            throw new RuntimeException('unable to set locale');
+        }
 
         if ($localeDir !== bindtextdomain($appName, $localeDir)) {
             throw new RuntimeException('unable to bind text domain');
