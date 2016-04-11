@@ -90,7 +90,7 @@ class TwigTemplateManager implements TemplateManagerInterface
         putenv(sprintf('LC_ALL=%s', $languageStr));
 
         if (false === setlocale(LC_ALL, [$languageStr, sprintf('%s.UTF-8', $languageStr)])) {
-            throw new RuntimeException('unable to set locale');
+            throw new RuntimeException(sprintf('unable to set locale "%s"', $languageStr));
         }
 
         if ($localeDir !== bindtextdomain($appName, $localeDir)) {

@@ -22,26 +22,37 @@ use PHPUnit_Framework_TestCase;
 
 class TwigTemplateManagerI18nTest extends PHPUnit_Framework_TestCase
 {
-    #    public function testDutch()
-#    {
-#        $t = new TwigTemplateManager(
-#            array(__DIR__.'/i18n')
-#        );
-
-#        $localeDir = __DIR__.'/i18n/locale';
-#        $t->setI18n('MyApp', 'nl_NL.UTF-8', $localeDir);
-#        $this->assertSame('Hallo World!', $t->render('1', array('name' => 'World')));
-#    }
-
-    public function testFrench()
+    public function testEnUs()
     {
         $t = new TwigTemplateManager(
             array(__DIR__.'/i18n')
         );
-
         $localeDir = __DIR__.'/i18n/locale';
+        $t->setI18n('MyApp', 'en_US', $localeDir);
+        $this->assertSame('Howdy World!', $t->render('1', array('name' => 'World')));
+    }
 
-        $t->setI18n('MyApp', 'fr_FR.UTF-8', $localeDir);
-        $this->assertSame('Bonjour World!', $t->render('1', array('name' => 'World')));
+    public function testNonExistingTranslation()
+    {
+        $t = new TwigTemplateManager(
+            array(__DIR__.'/i18n')
+        );
+        $localeDir = __DIR__.'/i18n/locale';
+        $t->setI18n('MyApp', 'en_GB', $localeDir);
+        $this->assertSame('Hello World!', $t->render('1', array('name' => 'World')));
+    }
+
+    /**
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage unable to set locale "xx_XX"
+     */
+    public function testInvalidLocale()
+    {
+        $t = new TwigTemplateManager(
+            array(__DIR__.'/i18n')
+        );
+        $localeDir = __DIR__.'/i18n/locale';
+        $t->setI18n('MyApp', 'xx_XX', $localeDir);
+        $this->assertSame('Hello World!', $t->render('1', array('name' => 'World')));
     }
 }
