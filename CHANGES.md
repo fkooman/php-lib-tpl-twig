@@ -1,5 +1,8 @@
 # Release History
 
+## 1.3.1 (2016-04-11)
+- make locale code more robust, fix Travis-CI build
+
 ## 1.3.0 (2016-04-11)
 - implement i18n support
 
