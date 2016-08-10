@@ -1,5 +1,8 @@
 # Release History
 
+## 1.3.3 (2016-08-10)
+- recursive create template cache directory if it does not exist
+
 ## 1.3.2 (2016-04-11)
 - only test with en_XX locales as not all test services
   have all the locales installed
